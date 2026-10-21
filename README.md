@@ -13,7 +13,7 @@ y Hack Nerd Font.
 ## Instalación
 
 ```bash
-git clone https://github.com/<tu-usuario>/dotfiles.git ~/dotfiles
+git clone https://github.com/Chenchi979/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
