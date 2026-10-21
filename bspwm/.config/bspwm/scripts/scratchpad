@@ -1,0 +1,23 @@
+#!/bin/sh
+# ~/.config/bspwm/scripts/scratchpad
+# Muestra u oculta una Kitty flotante (clase "scratchpad"), centrada en cualquier resolución
+
+id=$(xdotool search --class scratchpad | head -n 1)
+
+if [ -n "$id" ]; then
+    bspc node "$id" --flag hidden -f
+else
+    # 60 % de la pantalla, centrado
+    eval "$(xdotool getdisplaygeometry --shell)"   # define WIDTH y HEIGHT
+    w=$((WIDTH * 60 / 100)); h=$((HEIGHT * 60 / 100))
+    x=$(((WIDTH - w) / 2));  y=$(((HEIGHT - h) / 2))
+    kitty --class scratchpad &
+    # cuando aparezca, se coloca y se centra
+    { for _ in 1 2 3 4 5 6 7 8 9 10; do
+        nid=$(xdotool search --class scratchpad | head -n 1)
+        [ -n "$nid" ] && { bspc node "$nid" -t floating; \
+            xdotool windowsize "$nid" "$w" "$h"; \
+            xdotool windowmove "$nid" "$x" "$y"; break; }
+        sleep 0.1
+      done; } &
+fi

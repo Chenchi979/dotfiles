@@ -1,0 +1,14 @@
+/* ~/.config/rofi/config.rasi  ·  phant0m */
+
+configuration {
+    modi:               "drun,run,window";
+    show-icons:         true;
+    font:               "Hack Nerd Font 11";
+    display-drun:       "󰀻 Apps";
+    display-run:        "󰆍 Comandos";
+    display-window:     "󰖲 Ventanas";
+    drun-display-format: "{name}";
+    case-sensitive:     false;
+}
+
+@theme "~/.config/rofi/tokyonight.rasi"

@@ -1,0 +1,36 @@
+# ~/.config/dunst/dunstrc  ·  phant0m  (notificaciones)
+# Probar: notify-send "Hola" "Esto es una prueba"
+
+[global]
+    monitor = 0
+    follow = mouse
+    origin = top-right
+    offset = 15x50
+    width = 320
+    height = 120
+    frame_width = 2
+    frame_color = "#7aa2f7"
+    corner_radius = 10
+    separator_color = frame
+    font = Hack Nerd Font 10
+    padding = 10
+    horizontal_padding = 12
+    format = "<b>%s</b>\n%b"
+    icon_position = left
+    max_icon_size = 32
+
+[urgency_low]
+    background = "#1a1b26"
+    foreground = "#a9b1d6"
+    timeout = 4
+
+[urgency_normal]
+    background = "#1a1b26"
+    foreground = "#c0caf5"
+    timeout = 6
+
+[urgency_critical]
+    background = "#1a1b26"
+    foreground = "#f7768e"
+    frame_color = "#f7768e"
+    timeout = 0

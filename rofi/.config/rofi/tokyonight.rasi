@@ -1,0 +1,73 @@
+/* ~/.config/rofi/tokyonight.rasi */
+
+* {
+    bg:       #1a1b26;
+    bg-alt:   #24283b;
+    fg:       #c0caf5;
+    muted:    #545c7e;
+    accent:   #7aa2f7;
+    urgent:   #f7768e;
+
+    background-color: transparent;
+    text-color:       @fg;
+    margin:  0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width:            600px;
+    background-color: @bg;
+    border:           2px;
+    border-color:     @accent;
+    border-radius:    12px;
+}
+
+mainbox {
+    padding:  14px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius:    8px;
+    padding:          10px 12px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt { text-color: @accent; }
+
+entry {
+    placeholder:       "Buscar…";
+    placeholder-color: @muted;
+}
+
+listview {
+    lines:     8;
+    columns:   1;
+    margin:    12px 0 0 0;
+    spacing:   4px;
+    scrollbar: false;
+}
+
+element {
+    padding:       8px 12px;
+    border-radius: 8px;
+    spacing:       10px;
+}
+
+element selected {
+    background-color: @accent;
+    text-color:       @bg;
+}
+
+element-icon {
+    size: 1.2em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color:     inherit;
+    vertical-align: 0.5;
+}

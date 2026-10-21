@@ -1,0 +1,109 @@
+# ~/.config/sxhkd/sxhkdrc  ·  phant0m
+# Para aplicar cambios: super + Escape
+
+#==================== PROGRAMAS ====================
+
+# terminal
+super + Return
+	kitty
+
+# terminal flotante (scratchpad): aparece y se esconde
+super + z
+	~/.config/bspwm/scripts/scratchpad
+
+# lanzador de aplicaciones / cambiar de ventana
+super + {_,shift + }d
+	rofi -show {drun,window}
+
+# menú de apagado (bloquear, cerrar sesión, reiniciar, apagar)
+super + shift + e
+	~/.config/rofi/powermenu.sh
+
+# navegador (Parrot y Kali traen firefox-esr)
+super + shift + f
+	firefox-esr || firefox
+
+# Burp Suite
+super + shift + b
+	burpsuite
+
+# captura de pantalla (para informes)
+Print
+	flameshot gui
+
+# bloquear pantalla
+super + l
+	i3lock-fancy
+
+#==================== BSPWM ====================
+
+# recargar sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# reiniciar bspwm
+super + alt + r
+	bspc wm -r
+
+# salir de bspwm (cerrar sesión)
+ctrl + super + alt + q
+	bspc quit
+
+# cerrar ventana / matar el programa
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternar mosaico y monocle (una ventana a pantalla completa del escritorio)
+super + m
+	bspc desktop -l next
+
+# cambiar la ventana enfocada por la más grande
+super + g
+	bspc node -s biggest.window
+
+#==================== ESTADO DE LA VENTANA ====================
+
+# mosaico, pseudo-mosaico, flotante, pantalla completa
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+#==================== FOCO Y MOVER ====================
+
+# mover el foco
+super + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+# intercambiar la ventana con la de al lado
+super + shift + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+# mover una ventana flotante
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# volver al último escritorio
+super + Tab
+	bspc desktop -f last
+
+# ir a un escritorio / mandar la ventana allí
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#==================== REDIMENSIONAR ====================
+
+super + alt + {Left,Down,Up,Right}
+	~/.config/bspwm/scripts/bspw_resize {west,south,north,east}
+
+#==================== PRESELECCIÓN ====================
+
+# elegir dónde se abrirá la próxima ventana
+ctrl + super + alt + {Left,Down,Up,Right}
+	bspc node -p {west,south,north,east}
+
+# qué parte del hueco ocupará (1 = 10 % ... 9 = 90 %)
+ctrl + super + alt + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancelar la preselección
+ctrl + super + alt + space
+	bspc node -p cancel

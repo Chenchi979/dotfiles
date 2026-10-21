@@ -1,0 +1,43 @@
+# Paquetes que instala install.sh (Parrot / Kali). Uno por línea; # = comentario.
+# Si alguno no existe en tu versión, el instalador avisa y sigue con el resto.
+
+# --- Entorno gráfico ---
+bspwm
+sxhkd
+polybar
+picom
+rofi
+dunst
+libnotify-bin
+feh
+kitty
+i3lock-fancy
+flameshot
+
+# --- Utilidades X11 ---
+xdotool
+xclip
+suckless-tools
+x11-xserver-utils
+x11-xkb-utils
+x11-utils
+mesa-utils
+
+# --- Terminal ---
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+lsd
+bat
+fzf
+ripgrep
+fd-find
+
+# --- Herramientas base ---
+git
+curl
+wget
+unzip
+fontconfig
+stow
+build-essential
