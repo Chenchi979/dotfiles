@@ -156,8 +156,11 @@ install_packages() {
 
   for p in "${missing[@]}"; do
     case "$p" in
-      lsd) install_lsd_from_github ;;
-      *)   warn "El paquete '$p' no existe en tus repos; se ha saltado" ;;
+      lsd)     install_lsd_from_github ;;
+      bspwm)   install_bspwm_from_github ;;
+      sxhkd)   install_sxhkd_from_github ;;
+      polybar) install_polybar_from_github ;;
+      *)       warn "El paquete '$p' no existe en tus repos; se ha saltado" ;;
     esac
   done
 }
@@ -174,6 +177,54 @@ install_lsd_from_github() {
     ok "lsd instalado desde GitHub"
   else
     warn "No se pudo instalar lsd"
+  fi
+  rm -rf "$tmp"
+}
+
+install_bspwm_from_github() {
+  command -v bspwm >/dev/null && { ok "bspwm ya instalado"; return; }
+  info "bspwm no está en apt; compilando desde GitHub (baskerville/bspwm)"
+  local tmp; tmp="$(mktemp -d)"
+  if git clone --depth=1 https://github.com/baskerville/bspwm.git "$tmp/bspwm" 2>>"$LOG"; then
+    if (cd "$tmp/bspwm" && quiet make && quiet sudo make install); then
+      ok "bspwm compilado e instalado"
+    else
+      warn "No se pudo compilar bspwm (necesita dependencias de build)"
+    fi
+  else
+    warn "No se pudo clonar bspwm"
+  fi
+  rm -rf "$tmp"
+}
+
+install_sxhkd_from_github() {
+  command -v sxhkd >/dev/null && { ok "sxhkd ya instalado"; return; }
+  info "sxhkd no está en apt; compilando desde GitHub (baskerville/sxhkd)"
+  local tmp; tmp="$(mktemp -d)"
+  if git clone --depth=1 https://github.com/baskerville/sxhkd.git "$tmp/sxhkd" 2>>"$LOG"; then
+    if (cd "$tmp/sxhkd" && quiet make && quiet sudo make install); then
+      ok "sxhkd compilado e instalado"
+    else
+      warn "No se pudo compilar sxhkd (necesita dependencias de build)"
+    fi
+  else
+    warn "No se pudo clonar sxhkd"
+  fi
+  rm -rf "$tmp"
+}
+
+install_polybar_from_github() {
+  command -v polybar >/dev/null && { ok "polybar ya instalado"; return; }
+  info "polybar no está en apt; compilando desde GitHub (polybar/polybar)"
+  local tmp; tmp="$(mktemp -d)"
+  if git clone --depth=1 https://github.com/polybar/polybar.git "$tmp/polybar" 2>>"$LOG"; then
+    if (cd "$tmp/polybar" && mkdir -p build && cd build && quiet cmake .. && quiet make && quiet sudo make install); then
+      ok "polybar compilado e instalado"
+    else
+      warn "No se pudo compilar polybar (necesita cmake y dependencias de build)"
+    fi
+  else
+    warn "No se pudo clonar polybar"
   fi
   rm -rf "$tmp"
 }
